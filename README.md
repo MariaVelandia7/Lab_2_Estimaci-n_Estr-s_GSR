@@ -141,7 +141,7 @@ quemaduras;
 
 La zona AC-4 se subdivide adicionalmente según el aumento de la probabilidad de fibrilación ventricular.
 
-## 4.3
+## 4.3 Efectos de la corriente directa
 La norma clasifica los efectos de la corriente directa en cuatro zonas, dependiendo principalmente de la intensidad de corriente y el tiempo de exposición:
 
 ### DC-1
