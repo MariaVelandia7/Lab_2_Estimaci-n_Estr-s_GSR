@@ -28,10 +28,6 @@ En esta práctica se construyó y evaluó un vestible capaz de capturar de forma
 - Parte B = Construcción, prueba de reposo/respiración, umbrales.
 - Parte C = Transmisión inalámbrica.
 - 
-## Conclusión general
-En este laboratorio se logró capturar las señales requeridas implementando el sensor de gases MQ135 que fue previamente integrado a una mascarilla, esto permitió adquirir mejor la señal y redujo la influencia de otros factores (ruidos) que se puedan capturar del ambiente. Se registraron las señales en tiempo real correspondientes tanto a respiraciones normales como a periodos de habla, evidenciando diferencias en el comportamiento de la señal según la actividad realizada.
-Esta señal fue analizada en el dominio de la frecuencia mediante la transformada rápida de Fourier (FFT) para ver su espectro.
-
 # Explicación del circuito 
 
 | Componente | Valor | Función |
@@ -162,10 +158,71 @@ La IEC 60479 estudia los efectos potencialmente peligrosos de las corrientes que
 Por lo tanto, el hecho de que la EDA pueda medirse utilizando una señal eléctrica no significa que se deban aplicar al cuerpo corrientes cercanas a los niveles estudiados en la IEC 60479.
 
 La norma de efectos fisiológicos sirve, en este contexto, como fundamento para comprender por qué debe controlarse estrictamente la corriente que puede circular por el cuerpo.
+las variaciones que nos interesan que son lentas del GSR.
+
+## 5. Cálculo de seguridad de corriente máxima permitida a través de la piel
+
+Para el montaje se implementó una fuente de alimentación de 5 V, conectando una resistencia fija R₁ = 62 kΩ en serie con la resistencia equivalente de la piel. De esta manera, la tensión de alimentación se distribuye entre la resistencia de 62 kΩ y la resistencia de la piel, permitiendo analizar el comportamiento del circuito mediante un divisor de tensión.
+
+Para el caso particular en el que se considera que la resistencia de la piel es 0 Ω, se asume un comportamiento equivalente a un cortocircuito, es decir, una impedancia despreciable en la resistencia de 62 kΩ.
+
+Por esta razón, para este caso se realizaron los cálculos considerando:
 
 
-# Parte B — 
-# Parte C — 
+80.064 uA << 1 mA — el diseño cumple el criterio de seguridad con un margen de ~12 veces por debajo del límite exigido.
+
+# 6. Cálculo del filtro RC
+
+
+Adecuado porque la SCR varía en escala de segundos, mientras que el ruido eléctrico y los artefactos de movimiento tienen componentes de frecuencia más alta, que sí son atenuados por el filtro.
+
+# 7. Selección del vestible y ubicación de los electrodos
+
+Electrodos de moneda ubicados en la palma/dedos de la mano que es la zona de mayor densidad de glándulas sudoríparas ecrinas, sujetos en un guante deportivo comunmente implementado en el gimnasio. 
+Limitación: no son electrodos Ag-AgCl, por lo que puede haber polarización o reacciones galvánicas leves con el sudor.
+
+# Parte B — Construcción, prueba en reposo y definición de umbrales
+
+## Procedimiento
+
+1. Construir el dispositivo (electrodos tipo moneda, circuito R1/R2/C sobre proto-board y Arduino UNO) y verificar que la señal se visualice en tiempo real.
+2. Con el sujeto en reposo y sentado cómodamente, registrar la señal durante al menos 20–30 muestras para establecer la línea base.
+3. Pedir al sujeto una inspiración profunda seguida de una exhalación lenta. Registrar el valor máximo y mínimo observados.
+4. Evaluar el comportamiento del dispositivo mientras el sujeto se mueve,camina o escribe, documentando artefactos de movimiento.
+
+# Parte C — ANALISIS DE LA GRAFICA EN TIEMPO REAL 
+
+<img width="670" height="519" alt="GGSR" src="https://github.com/user-attachments/assets/fecf38dd-d78d-4deb-b188-7d7a1df507da" />
+
+
+La gráfica muestra una señal ascendente y sostenida de aproximadamente 1.0 V a 1.45 V entre los 10 y 22 segundos. No hay picos ni caídas bruscas, lo que indica un incremento progresivo de la conductancia de la piel, respuesta típica ante un estímulo estresante que se mantiene o intensifica.
+El código clasifica el estrés según el delta (incremento) entre el valor actual y la línea base (promedio de las primeras 20 muestras). Si convertimos los voltajes a ADC (escala 0-1023, 0-5V):
+
+-Reposo (≈1.0 V) → ~205 ADC
+-Pico (≈1.45 V) → ~297 ADC
+-Incremento máximo → ~92 ADC
+[ESTADO PARCIAL - Minuto 0.3]: Nivel de Estres = NADA / RELAJADO (Delta: 8.2)
+[ESTADO PARCIAL - Minuto 0.7]: Nivel de Estres = MEDIO (Delta: 24.5)
+[ESTADO PARCIAL - Minuto 1.0]: Nivel de Estres = ALTO (Delta: 78.3)
+[ESTADO PARCIAL - Minuto 1.3]: Nivel de Estres = ALTO (Delta: 112.0)
+
+Linea base (reposo): 310.5 ADC
+Valor maximo alcanzado: 499.0 ADC
+Incremento absoluto (Delta ADC): 188.5
+RESULTADO FINAL: Nivel de Estres = ALTO
+
+### Minuto 0.3 (≈18 s): Delta = 8.2 → NADA / RELAJADO
+La señal aún no ha superado el umbral de 12, por lo que el sistema considera que el sujeto está en reposo o con mínima activación.
+### Minuto 0.7 (≈42 s): Delta = 24.5 → MEDIO
+El delta supera 12 pero no llega a 30, indicando una activación moderada. El estímulo estresante ya está teniendo efecto, pero la respuesta aún no es intensa.
+### Minuto 1.0 (≈60 s): Delta = 78.3 → ALTO
+El delta supera ampliamente el umbral de 30. La conductancia de la piel ha aumentado significativamente, reflejando una respuesta de estrés clara y sostenida.
+### Minuto 1.3 (≈78 s): Delta = 112.0 → ALTO
+El delta sigue creciendo, indicando que el estrés no solo se mantiene, sino que se intensifica. Esto sugiere que el estímulo continúa o que el sujeto no logra relajarse.
+
+## ANALISIS FINAL DE LOS RESULTADOS
+
+El análisis temporal de la señal GSR revela una tendencia ascendente inequívoca a lo largo de los 60 segundos de captura. Partiendo de una línea base en reposo de aproximadamente 310 ADC, el sistema registró un incremento progresivo del delta (diferencia respecto al reposo) en los reportes parciales: 8.2 en el minuto 0.3 (estado RELAJADO), 24.5 en el minuto 0.7 (estado MEDIO) y alcanzando 78.3 y 112.0 en los minutos 1.0 y 1.3, superando ampliamente el umbral de 30 ADC que define el nivel ALTO. Esta evolución refleja un aumento sostenido de la conductancia eléctrica de la piel, directamente asociado a la activación del sistema nervioso simpático y, por tanto, a un incremento gradual del nivel de estrés fisiológico. El sujeto transitó exitosamente por los tres estados (RELAJADO → MEDIO → ALTO), consolidándose en el nivel máximo durante la mayor parte de la prueba, sin evidencia de recuperación o relajación. El sistema de clasificación demuestra una alta sensibilidad y respuesta en tiempo real, y el patrón obtenido es consistente con situaciones de estrés sostenido, como tareas mentales exigentes o estados de ansiedad mantenida, validando así la utilidad del dispositivo como herramienta de monitoreo fisiológico de bajo costo.
 
 # 15. Preguntas para la discusión
 ## 1. ¿A qué se debe que una inspiración profunda incremente la magnitud de la respuesta galvánica cutánea (GSR)?
