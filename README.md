@@ -50,7 +50,118 @@ Esta señal fue analizada en el dominio de la frecuencia mediante la transformad
 2. **R1** : Planteando un caso muy poco probable como que la resistencia de la piel sea 0 Ω, el circuito entraría en corto circuito, la corriente que pasa por el cuerpo del paciente esta determinada por R1 y la fuente de 5V, que más adelante explicaremos en los cálculos.
 3. **R2 y el Capacitor** : Al conectar estos dos componentes en paralelo se pretendía formar un filtro pasa-bajas que suavizaría la señal eliminando a su vez el ruido eléctrico de alta frecuencia y artefactos de movimiento propios del paciente, pero no filtraría 
 
-# Parte A — 
+# Parte A — Revisión de literatura 
+##1.1 Introducción
+La actividad electrodérmica (EDA) es una señal fisiológica que representa las variaciones en las propiedades eléctricas de la piel, y que se relaciona con la actividad del sistema nervioso autónomo (SNA). Fisiológicamente su origen está en las glándulas sudoríparas ecrinas, las cuales cambian la conductancia eléctrica de la piel al ser estimuladas.
+
+La EDA se utiliza principalmente en estudios de psicofisiología, para analizar respuestas fisiológicas asociadas a emociones y estrés. Especialmente por medio de aplicaciones clínicas como los dispositivos wearables, ya que permite registrar la señal de forma no invasiva y en conjunto con otras señales fisiológicas.
+
+Al hablar de la actividad electrodérmica aparece el término GSR que hace referencia a la respuesta galvánica de la piel, que describe los cambios en la conductancia de la piel debido a la estimulación del sistema simpático. En otras palabras, GSR es una forma de describir un cambio específico dentro de la EDA, que engloba todas las variaciones eléctricas, incluyendo el nivel basal y las respuestas rápidas o fásicas.
+
+##1.2 Fundamentos fisiológicos
+La piel constituye una barrera eléctrica relativamente resistiva debido principalmente a la capa córnea. Sin embargo, las glándulas sudoríparas modifican significativamente las propiedades eléctricas de la piel. Estas glándulas ecrinas están reguladas por el sistema nervioso simpático, y además están distribuidas por prácticamente toda la superficie corporal, pero presentan una concentración particularmente elevada en las palmas de las manos y plantas de los pies.
+
+Ante un estímulo que produzca activación autonómica (como  estrés, miedo, dolor o esfuerzo físico) aumenta la actividad de las glándulas sudoríparas. Aunque este incremento puede no ser suficiente para producir sudor visible, sí puede modificar la conductancia eléctrica de la piel. Es importante aclarar que la EDA no mide directamente una emoción. Una elevación de la señal indica principalmente una mayor activación simpática, que puede aparecer en situaciones muy diferentes. Por esta razón, la EDA puede emplearse como una medida indirecta de la actividad simpática.
+
+##1.3 Componentes de la señal EDA
+La señal EDA se divide en dos componentes:
+###Componente tónico
+Conocido como SCL o skin conductance level, representa la variación lenta del nivel basal de conductancia de la piel. Puede modificarse progresivamente por:
+temperatura
+hidratación
+actividad autonómica
+condiciones ambientales
+
+###Componente fásico
+Conocido como SCR o skin conductance responses es el componente que corresponde a los cambios rápidos de la señal debido a estímulos externos y repentinos como miedo, esfuerzo o estrés.
+
+La distinción entre componentes tónicos y fásicos es importante porque una persona puede presentar un nivel basal elevado sin necesariamente presentar numerosas respuestas fásicas. Las técnicas modernas de procesamiento de EDA analizan ambos componentes, en lugar de limitarse al valor promedio de la señal.
+
+##2. Relación entre EDA y actividad cardiaca
+Una de las aplicaciones más interesantes de la EDA consiste en combinarla con señales cardiovasculares, especialmente el electrocardiograma (ECG). 
+La EDA es especialmente sensible a la actividad simpática, mientras que variables derivadas del ECG, como la variabilidad de la frecuencia cardíaca (HRV), permiten estudiar principalmente diferentes aspectos de la regulación autonómica cardíaca, con una importante contribución parasimpática en medidas como RMSSD y HF.
+
+Estudios que han analizado simultáneamente EDA y HRV han encontrado interacciones entre los componentes simpático y parasimpático del sistema nervioso autónomo. En particular, se han desarrollado métodos para estudiar la interacción temporal entre EDA y HRV durante estados de reposo y durante estímulos estresantes. 
+Cuando aumenta la GSR, frecuentemente también aumenta la frecuencia cardíaca, pero no necesariamente en una relación 1:1 ni al mismo tiempo.
+
+##3. Relación entre EDA y actividad respiratoria
+La respiración también está estrechamente relacionada con la regulación autonómica y, por lo tanto, puede presentar modificaciones simultáneas a la EDA.
+
+Aquí existe una interacción un poco más compleja, pues la respiración sí puede modificar la actividad cardíaca, fenómeno conocido como arritmia sinusal respiratoria (RSA). Normalmente, durante la inspiración aumenta la frecuencia cardíaca, y con la espiración se disminuye.
+
+Por eso, cuando registras simultáneamente GSR + ECG + respiración, puedes observar cómo las tres señales cambian durante una misma respuesta fisiológica.
+
+Además para la práctica se implementa la técnica para generar cambios en la GSR de forma artificial, ya que la respiración profunda y, especialmente, la exhalación rápida pueden modificar la actividad autonómica y producir cambios transitorios en la GSR, por lo que la señal de la piel puede cambiar después de modificar deliberadamente el patrón respiratorio.
+
+Además, la respiración puede convertirse en una fuente de artefactos durante la adquisición de EDA. Los estudios  recientes identifican específicamente la respiración, el movimiento y el habla como fuentes fisiológicas importantes de artefactos en las señales EDA, especialmente en dispositivos wearables.
+
+#4. Efectos de la corriente directa y alterna en seres humanos según IEC 60479-1
+
+La norma IEC 60479-1:2018, Effects of current on human beings and livestock – Part 1: General aspects, constituye una referencia internacional para describir los efectos de la corriente eléctrica sobre seres humanos y animales.
+
+Los efectos producidos por una descarga no dependen exclusivamente de la magnitud de la corriente. También influyen:
+duración del contacto
+frecuencia
+trayectoria de la corriente
+impedancia corporal
+estado de la piel
+tamaño del área de contacto
+condiciones ambientales
+
+Por esto, una corriente determinada no necesariamente produce el mismo efecto en todas las personas o bajo todas las condiciones.
+
+##4.1 Impedancia del cuerpo humano
+El cuerpo humano no se comporta como una resistencia eléctrica pura.
+
+La piel constituye una parte importante de la impedancia total y sus propiedades eléctricas dependen de factores como humedad, presión, área de contacto y tensión aplicada.
+
+Este aspecto tiene una conexión conceptual importante con la EDA: mientras la IEC analiza la impedancia del cuerpo desde la perspectiva de la seguridad frente al choque eléctrico, la EDA aprovecha las variaciones de las propiedades eléctricas de la piel para estudiar actividad fisiológica.
+
+##4.2 Efectos de la corriente alterna
+La IEC 60479-1 clasifica los efectos de la corriente alterna en diferentes zonas tiempo-corriente.
+
+##Para corriente alterna, las zonas se denominan:
+###AC-1
+Puede producirse percepción de la corriente, pero normalmente no se esperan respuestas fisiológicas peligrosas.
+
+###AC-2
+Puede aparecer percepción y contracción muscular involuntaria, aunque normalmente sin efectos fisiológicos peligrosos.
+
+###AC-3
+Puede producir contracciones musculares fuertes, dificultad respiratoria, inmovilización, alteraciones cardíacas reversibles.
+
+###AC-4
+Representa una zona de mayor peligro y pueden aparecer:
+fibrilación ventricular;
+paro cardíaco;
+paro respiratorio;
+quemaduras;
+
+La zona AC-4 se subdivide adicionalmente según el aumento de la probabilidad de fibrilación ventricular.
+
+##4.3
+La norma clasifica los efectos de la corriente directa en cuatro zonas, dependiendo principalmente de la intensidad de corriente y el tiempo de exposición:
+
+###DC-1
+Generalmente no se percibe la corriente. En algunos casos puede existir una ligera sensación.
+
+###DC-2
+Puede producirse percepción de la corriente y contracciones musculares involuntarias, pero normalmente sin efectos fisiológicos peligrosos.
+
+###DC-3
+Pueden aparecer contracciones musculares fuertes, dificultad para respirar y alteraciones reversibles en la actividad cardíaca.
+
+###DC-4
+Zona de mayor peligro. Puede producir paro respiratorio, paro cardíaco, quemaduras y fibrilación ventricular, aumentando el riesgo con la intensidad y duración de la exposición.
+
+##4.4 Relación entre IEC 60479 y el diseño de un sensor EDA
+La IEC 60479 estudia los efectos potencialmente peligrosos de las corrientes que atraviesan el cuerpo humano. En cambio, un sistema de EDA está diseñado para realizar una medición fisiológica de baja energía.
+
+Por lo tanto, el hecho de que la EDA pueda medirse utilizando una señal eléctrica no significa que se deban aplicar al cuerpo corrientes cercanas a los niveles estudiados en la IEC 60479.
+
+La norma de efectos fisiológicos sirve, en este contexto, como fundamento para comprender por qué debe controlarse estrictamente la corriente que puede circular por el cuerpo.
+
+
 # Parte B — 
 # Parte C — 
 
