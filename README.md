@@ -168,10 +168,12 @@ Para el caso particular en el que se considera que la resistencia de la piel es 
 
 Por esta razón, para este caso se realizaron los cálculos considerando:
 
+<img width="1280" height="492" alt="CORRIENTE" src="https://github.com/user-attachments/assets/8d84eca4-7519-483d-a13c-c93290390294" />
 
 80.064 uA << 1 mA — el diseño cumple el criterio de seguridad con un margen de ~12 veces por debajo del límite exigido.
 
 # 6. Cálculo del filtro RC
+<img width="1280" height="479" alt="FC" src="https://github.com/user-attachments/assets/4d28bc34-426f-4198-87a5-e5495e07c99f" />
 
 
 Adecuado porque la SCR varía en escala de segundos, mientras que el ruido eléctrico y los artefactos de movimiento tienen componentes de frecuencia más alta, que sí son atenuados por el filtro.
