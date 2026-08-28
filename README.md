@@ -167,6 +167,26 @@ La norma de efectos fisiológicos sirve, en este contexto, como fundamento para 
 # Parte B — 
 # Parte C — 
 
+# 15. Preguntas para la discusión
+## 1. ¿A qué se debe que una inspiración profunda incremente la magnitud de la respuesta galvánica cutánea (GSR)?
+Una inspiración profunda, especialmente cuando está acompañada de una exhalación rápida, puede generar cambios en la actividad del sistema nervioso autónomo. Estos cambios pueden aumentar temporalmente la actividad de las glándulas sudoríparas, haciendo que la piel sea más conductora eléctricamente. Como consecuencia, disminuye la resistencia de la piel y aumenta la conductancia, lo que se observa como un incremento en la magnitud de la señal GSR, que se evidencia en la gráfica como picos o aumento de la señal. Por lo tanto, la respiración profunda actúa como un estímulo capaz de producir una respuesta transitoria en la actividad electrodérmica.
+
+## 2. ¿Cuáles serían las ventajas y desventajas de utilizar la GSR como indicador de estrés?
+### Ventajas:
+-Es una técnica sencilla y no invasiva.
+-Es sensible a cambios en la actividad del sistema nervioso simpático.
+-Permite detectar cambios rápidos en la activación fisiológica.
+-Es relativamente fácil de implementar en dispositivos portátiles.
+-Puede combinarse con otras señales, como ECG y respiración, para obtener una evaluación más completa.
+
+### Desventajas:
+-La GSR no es específica del estrés, ya que también puede cambiar por emociones, ejercicio, dolor o excitación.
+-Puede verse afectada por factores externos como temperatura, humedad y movimiento.
+-Existe una variabilidad considerable entre diferentes personas.
+-Por sí sola no permite determinar la causa exacta del cambio observado.
+
+En conclusión, la GSR es un buen indicador de activación fisiológica asociada al estrés, pero es recomendable combinarla con otras señales fisiológicas para obtener una interpretación más confiable.
+
 # Bibliografía
 [1] 
 [4] Components101, "MQ135 Gas Sensor," [Online]. Disponible en: https://components101.com/sensors/mq135-gas-sensor-for-air-quality
