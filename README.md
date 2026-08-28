@@ -189,8 +189,12 @@ En conclusión, la GSR es un buen indicador de activación fisiológica asociada
 
 # Bibliografía
 [1] H. D. Critchley, “Electrodermal responses: What happens in the brain,” The Neuroscientist, vol. 8, no. 2, pp. 132–142, 2002.
+
 [2] W. Boucsein et al., “Publication recommendations for electrodermal measurements,” Psychophysiology, vol. 49, no. 8, pp. 1017–1034, 2012.
+
 [3] “Inclusion of Respiratory Frequency Information in Heart Rate Variability Analysis for Stress Assessment,” Frontiers in Physiology, 2016.
+
 [4] Y. Nagai, C. I. Jones, and A. Sen, “Galvanic Skin Response (GSR)/Electrodermal/Skin Conductance Biofeedback on Epilepsy: A Systematic Review and Meta-Analysis,” Frontiers in Neurology, vol. 10, Art. no. 377, 2019.
+
 [5] International Electrotechnical Commission, “IEC 60479-1: 2018: Effects of Current on Human Beings and Livestock – Part 1: General Aspects,” 2018. 
 
