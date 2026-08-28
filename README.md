@@ -121,8 +121,8 @@ Este aspecto tiene una conexión conceptual importante con la EDA: mientras la I
 
 ## 4.2 Efectos de la corriente alterna
 La IEC 60479-1 clasifica los efectos de la corriente alterna en diferentes zonas tiempo-corriente.
+Para corriente alterna, las zonas se denominan:
 
-## Para corriente alterna, las zonas se denominan:
 ### AC-1
 Puede producirse percepción de la corriente, pero normalmente no se esperan respuestas fisiológicas peligrosas.
 
