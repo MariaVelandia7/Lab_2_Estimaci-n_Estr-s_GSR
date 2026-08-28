@@ -65,8 +65,10 @@ Ante un estímulo que produzca activación autonómica (como  estrés, miedo, do
 
 ## 1.3 Componentes de la señal EDA
 La señal EDA se divide en dos componentes:
-###Componente tónico
-Conocido como SCL o skin conductance level, representa la variación lenta del nivel basal de conductancia de la piel. Puede modificarse progresivamente por:
+
+### Componente tónico
+Conocido como SCL o skin conductance level, representa la variación lenta del nivel basal de conductancia de la piel. 
+Puede modificarse progresivamente por:
 temperatura
 hidratación
 actividad autonómica
